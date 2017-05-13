@@ -27,7 +27,7 @@ public class AddAuthor extends HttpServlet {
             String phone = req.getParameter("phone");
 
             if (name  == null || name.isEmpty() || phone  == null || phone.isEmpty()){
-
+                throw new Exception();
             }
 
             AuthorDao dao = new AuthorSqlDao();
