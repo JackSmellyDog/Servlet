@@ -21,23 +21,34 @@ import java.util.Calendar;
 public class AddPatent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long id = Long.parseLong(req.getParameter("id"));
-        String name = req.getParameter("name");
-        long author_id = Long.parseLong(req.getParameter("author_id"));
-        String formula = req.getParameter("formula");
-        String essay = req.getParameter("essay");
-
         resp.setContentType("text/html");
-        PatentDao dao = new PatentSqlDao();
-        AuthorDao authorDao = new AuthorSqlDao();
         try {
-            dao.insert(new Patent(id, name, authorDao.getById(author_id), formula, essay, Calendar.getInstance()));
+            long id = Long.parseLong(req.getParameter("id"));
+            String name = req.getParameter("name");
+            long author_id = Long.parseLong(req.getParameter("author_id"));
+            String formula = req.getParameter("formula");
+            String essay = req.getParameter("essay");
+
+            if (name  == null || name.isEmpty() || formula  == null || formula.isEmpty() || essay  == null || essay.isEmpty()){
+                 throw new Exception();
+            }
+
+            PatentDao dao = new PatentSqlDao();
+            AuthorDao authorDao = new AuthorSqlDao();
+            try {
+                dao.insert(new Patent(id, name, authorDao.getById(author_id), formula, essay, Calendar.getInstance()));
+                PrintWriter writer = resp.getWriter();
+                writer.println("<h2>Patent has been added</h2>");
+                writer.println("<br><a href = 'index.jsp'><< back</a>");
+                writer.close();
+            } catch (DataBaseException e) {
+                System.out.println("Terrible error!!!");
+            }
+        } catch (Exception e) {
             PrintWriter writer = resp.getWriter();
-            writer.println("<h2>Patent has been added</h2>");
+            writer.println("<h2>Error patent</h2>");
             writer.println("<br><a href = 'index.jsp'><< back</a>");
             writer.close();
-        } catch (DataBaseException e) {
-            System.out.println("Terrible error!!!");
         }
     }
 
