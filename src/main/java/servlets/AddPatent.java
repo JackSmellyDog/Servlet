@@ -42,7 +42,10 @@ public class AddPatent extends HttpServlet {
                 writer.println("<br><a href = 'index.jsp'><< back</a>");
                 writer.close();
             } catch (DataBaseException e) {
-                System.out.println("Terrible error!!!");
+                PrintWriter writer = resp.getWriter();
+                writer.println("<h2>Database error</h2>");
+                writer.println("<br><a href = 'index.jsp'><< back</a>");
+                writer.close();
             }
         } catch (Exception e) {
             PrintWriter writer = resp.getWriter();
@@ -67,7 +70,10 @@ public class AddPatent extends HttpServlet {
             }
             selectBuilder.append("</select>");
         } catch (DataBaseException e) {
-            System.out.println("error patent with author");
+            PrintWriter writer = resp.getWriter();
+            writer.println("<h2>Database error</h2>");
+            writer.println("<br><a href = 'index.jsp'><< back</a>");
+            writer.close();
         }
 
         builder.append("<h2>Add patent</h2>")

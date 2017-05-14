@@ -38,7 +38,10 @@ public class AddAuthor extends HttpServlet {
                 writer.println("<br><a href = 'index.jsp'><< back</a>");
                 writer.close();
             } catch (DataBaseException e) {
-                System.out.println("Terrible error!!!");
+                PrintWriter writer = resp.getWriter();
+                writer.println("<h2>Database error</h2>");
+                writer.println("<br><a href = 'index.jsp'><< back</a>");
+                writer.close();
             }
         } catch (Exception e) {
             PrintWriter writer = resp.getWriter();
