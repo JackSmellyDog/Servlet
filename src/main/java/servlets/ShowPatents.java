@@ -30,6 +30,7 @@ public class ShowPatents extends HttpServlet {
                     .append("<td><strong>Author</strong></td>")
                     .append("<td><strong>Formula</strong></td>")
                     .append("<td><strong>Essay</strong></td>")
+                    .append("<td><strong>Delete</strong></td>")
                     .append("</tr>");
 
             for (Patent patent : patents){
@@ -39,6 +40,9 @@ public class ShowPatents extends HttpServlet {
                         .append("<td>").append(patent.getAuthor().getName()).append("</td>")
                         .append("<td>").append(patent.getFormula()).append("</td>")
                         .append("<td>").append(patent.getEssay()).append("</td>")
+                        .append("<td>")
+                        .append("<a href = 'DeletePatent?id=").append(patent.getId()).append("'>X</a>")
+                        .append("</td>")
                         .append("</tr>");
             }
 
