@@ -70,7 +70,8 @@ public class AddPatent extends HttpServlet {
             System.out.println("error patent with author");
         }
 
-        builder.append("<form method=\"POST\" action=\"AddPatent\">")
+        builder.append("<h2>Add patent</h2>")
+                .append("<form method=\"POST\" action=\"AddPatent\">")
                 .append("<table>")
                 .append("<tr><td>Id:</td><td><input type=\"text\" name=\"id\"></td></tr>")
                 .append("<tr><td>Name:</td><td><input type=\"text\" name=\"name\"></td></tr>")

@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>Ukrainian Patent</h2>
+<h2>Add author</h2>
 
     <form method="POST" action="AddAuthor">
         <table>

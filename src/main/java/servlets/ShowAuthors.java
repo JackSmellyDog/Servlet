@@ -29,6 +29,7 @@ public class ShowAuthors extends HttpServlet {
                     .append("<td><strong>Id</strong></td>")
                     .append("<td><strong>Name</strong></td>")
                     .append("<td><strong>Phone</strong></td>")
+                    .append("<td><strong>Delete</strong></td>")
                     .append("</tr>");
 
             for (Author author : authors){
@@ -36,6 +37,9 @@ public class ShowAuthors extends HttpServlet {
                         .append("<td>").append(author.getId()).append("</td>")
                         .append("<td>").append(author.getName()).append("</td>")
                         .append("<td>").append(author.getPhone()).append("</td>")
+                        .append("<td>")
+                        .append("<a href = 'DeleteAuthor?id=").append(author.getId()).append("'>X</a>")
+                        .append("</td>")
                         .append("</tr>");
             }
 
