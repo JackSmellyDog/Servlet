@@ -1,8 +1,13 @@
 import dao.AuthorDao;
+import dao.PatentDao;
 import dao.impl.AuthorSqlDao;
+import dao.impl.PatentSqlDao;
 import model.Author;
+import model.Patent;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Calendar;
 
 
 public class MainTest {
@@ -54,21 +59,52 @@ public class MainTest {
 
     @Test
     public void MySQLPatentGetTest() throws Exception {
+        Author author = new Author(1, "Ivanov Ivan Ivanovich", "11111111111");
+        Patent patent = new Patent(1, "Internet", author, "fffffffff", "eeeeeeeee", Calendar.getInstance());
 
+        PatentDao patentDao = new PatentSqlDao();
+
+        Assert.assertEquals(patent, patentDao.getById(1));
     }
 
     @Test
     public void MySQLPatentInsertTest() throws Exception {
+        PatentDao patentDao = new PatentSqlDao();
+        Author author = new Author(1, "Ivanov Ivan Ivanovich", "11111111111");
+        Patent patent = new Patent(99, "Test Patent", author, "testF", "testE", Calendar.getInstance());
+        patentDao.insert(patent);
 
+        Assert.assertEquals(patent, patentDao.getById(99));
+
+        patentDao.deleteById(99);
     }
 
     @Test
     public void MySQLPatentUpdateTest() throws Exception {
+        PatentDao patentDao = new PatentSqlDao();
+        Author author = new Author(1, "Ivanov Ivan Ivanovich", "11111111111");
+        Patent patent = new Patent(99, "Test Patent", author, "testF", "testE", Calendar.getInstance());
+        patentDao.insert(patent);
 
+        Patent newPatent = new Patent(99, "New Test Patent", author, "newTestF", "newTestE", Calendar.getInstance());
+        patentDao.update(99, newPatent);
+
+        Assert.assertEquals(newPatent, patentDao.getById(99));
+        Assert.assertNotEquals(author, patentDao.getById(99));
+
+        patentDao.deleteById(99);
     }
 
     @Test
     public void MySQLPatentDeleteTest() throws Exception {
+        PatentDao patentDao = new PatentSqlDao();
+        Author author = new Author(1, "Ivanov Ivan Ivanovich", "11111111111");
+        Patent patent = new Patent(99, "Test Patent", author, "testF", "testE", Calendar.getInstance());
+        patentDao.insert(patent);
+
+        Assert.assertTrue(patentDao.getAll().contains(patent));
+        patentDao.deleteById(99);
+        Assert.assertFalse(patentDao.getAll().contains(patent));
 
     }
 

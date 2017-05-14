@@ -43,4 +43,24 @@ public class Patent extends Item {
                 essay
         );
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Patent)) return false;
+        if (!super.equals(o)) return false;
+
+        Patent patent = (Patent) o;
+
+        if (formula != null ? !formula.equals(patent.formula) : patent.formula != null) return false;
+        return essay != null ? essay.equals(patent.essay) : patent.essay == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (formula != null ? formula.hashCode() : 0);
+        result = 31 * result + (essay != null ? essay.hashCode() : 0);
+        return result;
+    }
 }
